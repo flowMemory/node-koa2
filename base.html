@@ -1,0 +1,55 @@
+<!-- 
+    node - koa2 学习
+    cls: 命令行清屏
+    vscode 调试方式：debugger 代码序列，单击，F5开启
+
+        接口的请求方式：
+            1. url拼接:  /v1/api/XXX
+            2. url参数:  /v1/api/banner?a=1
+            3. json data: {a:1, b:2}
+
+        1. ctx 上下文引用对象，传递参数，处理请求服务
+        2. next 中间件向下执行的命令
+        3. request 对象：
+            1. ctx.header  请求头
+            2. ctx.path    判断请求路由
+            3. ctx.method  请求方式
+            4. ctx.query   请求参数
+
+        4. response 对象：
+            1. ctx.body    响应值
+            2. ctx.status  响应状态
+
+        5. 路由： 
+            1. 原始路由：
+                app.use(async (ctx, next) => {
+                    if(ctx.path=="/v1/api/book" && ctx.method=="GET") {
+                        //console.log(ctx)
+                        console.log(ctx.path)
+                        console.log(ctx.method)
+                    }
+                    ctx.body = 'Hello liuyi';
+                });
+
+            2. 使用koa2 路由插件 koa-router
+
+            3. 使用 requireDirectory 实现路由自动注册
+
+            4. 路由参数校验
+        
+        6. 处理全局代码异常机制：
+            1. 异常处理的必要性和意义：保障代码正常运行，以及发现代码异常问题，定位问题，更加快速解决问题
+            2. 使用全局中间件的方式捕捉异常：1. 未知异常。 2. 已知异常
+            3. 定义异常返回对象规范，错误信息：请求响应状态code, 错误状态ereor_code, 请求报错表述mes, 请求路径request_url
+            4. 封装异常处理基类：HttpException，封装异常响应传参。 exception: 捕捉全局异常错误
+                未每一种异常定义处理方法，继承HttpException
+            5. exception中间件捕获全局异常，注册在app全局对象上，从而可以实现对所有中间件方法的监听
+
+            6. 异常捕获必须针对promise对象，使用async await 同步等待方法执行结果，因为try catch 对异步操作无法正常捕获错误
+            7. promise 可以把普通类型包装成promise的返回结果
+            8. await具有对表达式求值的能力
+
+        7. 代码维护原则：尽量不要做删除原有代码，或者不断的添加判断条件。实现代码的解耦，做扩展操作。
+
+
+ -->
