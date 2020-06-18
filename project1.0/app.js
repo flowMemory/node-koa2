@@ -1,11 +1,8 @@
 const Koa = require('koa');
-const Router = require('@koa/router');
+const InitManager = require('./core/init')
 const app = new Koa();
-const router = new Router();
 
-router.get('/v1/api/book', (ctx, next) => {
-    console.log(ctx.path)
-});
+// 调用静态方法，初始化路由注册
+InitManager.initCore(app)
 
-app.use(router.routes());
 app.listen(3000);
