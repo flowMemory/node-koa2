@@ -1,11 +1,16 @@
 const Router = require('koa-router');
-const {HttpException, ParameterException} = require('../../core/http-exception');
+const {PositiveIntegerValidator} = require('../validators/validator');
 const router = new Router();
 
-router.get('/v1/api/book', (ctx, next) => {
+router.get('/v1/api/book', async (ctx, next) => {
     if(true) {
-        const error = new HttpException('not book',999,404)
-        throw error
+        //console.log(ctx.query.id)
+        // 校验
+        const v = await new PositiveIntegerValidator().validate(ctx)
+        // 取参数
+        const id = v.get("body.id")
+        console.log(id)
+        ctx.body = id
     }
     console.log(ctx.path)
 });
