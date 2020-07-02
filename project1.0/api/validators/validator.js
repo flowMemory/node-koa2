@@ -3,7 +3,7 @@
 // lin-validator 做了参数类型的转换 
 // validtor 引用了http-exception 自动做错误处理
 // 检验逻辑顺序：validator -> http-exception -> exception 
-const { LinValidator, Rule } = require('../../core/lin-validator')
+const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {

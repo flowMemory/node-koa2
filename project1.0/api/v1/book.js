@@ -1,14 +1,14 @@
 const Router = require('koa-router');
 const {PositiveIntegerValidator} = require('../validators/validator');
-const router = new Router();
 
-router.get('/v1/api/book', async (ctx, next) => {
+const router = new Router({
+    prefix: '/v1/api/book'
+})
+
+router.get('/hot', async (ctx, next) => {
     if(true) {
-        //console.log(ctx.query.id)
-        // 校验
         const v = await new PositiveIntegerValidator().validate(ctx)
-        // 取参数
-        const id = v.get("body.id")
+        const id = v.get("query.id")
         console.log(id)
         ctx.body = id
     }
