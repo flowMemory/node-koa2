@@ -3,11 +3,11 @@ const serveConfig = {
     environment: 'dev',
     // 数据库连接配置
     database:{
-        dbName:'7yue',
+        dbName:'flowmemory',
         host:'localhost',
         port:3306,
         user:'root',
-        password:'123456',
+        password:'island123',
     },
     // token 密钥，有效时间：一个月
     security:{
