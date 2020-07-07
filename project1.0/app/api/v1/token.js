@@ -47,7 +47,7 @@ router.post('/verify', async (ctx)=>{
     }
 })
 
-// email登录方式处理 : 获取token 
+// email登录方式处理 :  获取token 
 async function emailLogin(account, secret) {
     // 查询库检验账号密码
     const user = await User.verifyEmailPassword(account, secret)
