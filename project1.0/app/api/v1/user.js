@@ -11,6 +11,7 @@ const router = new Router({
 // 静态
 
 router.post('/register', async (ctx) => {
+    console.log(ctx)
     const v = await new RegisterValidator().validate(ctx)
     // email password
     // token jwt
@@ -24,6 +25,8 @@ router.post('/register', async (ctx) => {
         password: v.get('body.password2'),
         nickname: v.get('body.nickname')
     }
+    
+    console.log(user)
 
     // 校验成功写入库
     await User.create(user)

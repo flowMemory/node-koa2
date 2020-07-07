@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const {PositiveIntegerValidator} = require('../validators/validator');
+const {PositiveIntegerValidator} = require('../../validators/validator');
 
 const router = new Router({
     prefix: '/v1/api/book'

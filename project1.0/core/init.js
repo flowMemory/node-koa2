@@ -18,7 +18,7 @@ class InitManager {
 
     // 自动注册路由
     static initLoadRouters(){
-        const apiDirectory = `${process.cwd()}/api`
+        const apiDirectory = `${process.cwd()}/app/api`
         requireDirectory(module, apiDirectory, {
             visit: whenLoadModule
         })
