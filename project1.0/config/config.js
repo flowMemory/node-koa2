@@ -1,4 +1,4 @@
-const serveConfig = {
+const config = {
     // 开发环境 prod
     environment: 'dev',
     // 数据库连接配置
@@ -17,5 +17,5 @@ const serveConfig = {
 }
 
 module.exports = {
-    serveConfig
+    config
 }

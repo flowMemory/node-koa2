@@ -6,7 +6,16 @@
             http-exception.js : 定义具体的错误类型
 
             validator.js： 校验路由参数，如果错误由lin-validator自动调用http-exception中的参数错误类型，进行通报异常
+                验证器的职责：
+                    1. 验证数据提交的合法性（数据类型，完整，提交方式等）
+                    2. 查询数据库，验证数据的的重复性
+                    
+    island服务端：
+        1. token.js: '/'  普通登录接口
+                     '/verify' token登录接口
 
+        2. bcrypt.js 数据加密
+        3. jwt：生成token
 
     服务端编程的外延：
         1. 项目部署

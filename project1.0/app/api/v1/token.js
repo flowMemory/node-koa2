@@ -14,16 +14,14 @@ const router = new Router({
     prefix: '/v1/token'
 })
 
-// 获取 token 接口
+// 获取 token 接口 ：登录接口
 router.post('/', async (ctx) => {
+    // 验证登录
     const v = await new TokenValidator().validate(ctx)
     let token;
     switch (v.get('body.type')) {
         case LoginType.USER_EMAIL:
-            token = await emailLogin(
-                v.get('body.account'),
-                v.get('body.secret')
-            )
+            token = await emailLogin(v.get('body.account'), v.get('body.secret'))
             break
         case LoginType.USER_MINI_PROGRAM:
             token = await WXManager.codeToToken(v.get('body.account'))
@@ -39,7 +37,7 @@ router.post('/', async (ctx) => {
     }
 })
 
-// 校验token
+// 校验token ：二次token登录，验证token
 router.post('/verify', async (ctx)=>{
     // token
     const v = await new NotEmptyValidator().validate(ctx)
@@ -49,9 +47,12 @@ router.post('/verify', async (ctx)=>{
     }
 })
 
-// 获取token
+// email登录方式处理 : 获取token 
 async function emailLogin(account, secret) {
+    // 查询库检验账号密码
     const user = await User.verifyEmailPassword(account, secret)
+
+    // 合法后生成token：最终返回token给客服端
     return token = generateToken(user.id, Auth.USER)
 }
 

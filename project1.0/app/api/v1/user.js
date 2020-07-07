@@ -7,7 +7,7 @@ const router = new Router({
     prefix: '/v1/user'
 })
 
-//注册 新增数据 put get delete
+// 注册 新增数据 put get delete
 // 静态
 
 router.post('/register', async (ctx) => {

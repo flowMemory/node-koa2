@@ -12,8 +12,8 @@ class InitManager {
 
     static loadConfig(path = '') {
         const configPath = path || process.cwd() + '/config/config.js'
-        const { serveConfig } = require(configPath)
-        global.serveConfig = serveConfig
+        const { config } = require(configPath)
+        global.config = config
     }
 
     // 自动注册路由
