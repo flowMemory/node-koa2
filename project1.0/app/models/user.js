@@ -23,7 +23,7 @@ class User extends Model {
         return user
     }
 
-    // wx业务
+    // wx登录业务
     static async getUserByOpenid(openid){
         const user = await User.findOne({
             where:{
@@ -33,6 +33,7 @@ class User extends Model {
         return user
     }
 
+    // 通过openid注册
     static async registerByOpenid(openid) {
         return await User.create({
             openid
