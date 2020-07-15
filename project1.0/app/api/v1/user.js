@@ -11,7 +11,7 @@ const router = new Router({
 // 静态
 
 router.post('/register', async (ctx) => {
-    console.log(ctx)
+    // console.log(ctx)
     const v = await new RegisterValidator().validate(ctx)
     // email password
     // token jwt

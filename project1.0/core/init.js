@@ -7,7 +7,7 @@ class InitManager {
         InitManager.app = app
         InitManager.loadConfig()
         InitManager.initLoadRouters()
-        // InitManager.loadHttpException()
+        InitManager.loadHttpException()
     }
 
     static loadConfig(path = '') {
@@ -30,10 +30,10 @@ class InitManager {
         }
     }
 
-    // static loadHttpException(){
-    //     const errors = require('./http-exception')
-    //     global.errs = errors
-    // }
+    static loadHttpException(){
+        const errors = require('./http-exception')
+        global.errs = errors
+    }
 }
 
 module.exports = InitManager

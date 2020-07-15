@@ -5,6 +5,7 @@
 // 检验逻辑顺序：validator -> http-exception -> exception 
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
+const { LoginType } = require('../lib/enum')
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {
@@ -64,6 +65,7 @@ class RegisterValidator extends LinValidator {
     }
 }
 
+// 登录接口
 class TokenValidator extends LinValidator {
     constructor() {
         //隐藏的错误
@@ -87,7 +89,7 @@ class TokenValidator extends LinValidator {
 
     }
 
-    // 类下面的原型方式
+    // 类下面的原型方式 --  这个方法会被自动执行吗？
     validateLoginType(vals) {
         if (!vals.body.type) {
             throw new Error('type是必须参数')

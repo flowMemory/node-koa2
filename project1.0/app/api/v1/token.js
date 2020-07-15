@@ -19,6 +19,7 @@ router.post('/', async (ctx) => {
     // 验证登录
     const v = await new TokenValidator().validate(ctx)
     let token;
+    console.log(v.get('body.type'))
     switch (v.get('body.type')) {
         case LoginType.USER_EMAIL:
             token = await emailLogin(v.get('body.account'), v.get('body.secret'))
