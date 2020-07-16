@@ -1,5 +1,9 @@
-const bcrypt = require('bcryptjs')
+// 密码加密工具
+const bcrypt = require('bcryptjs') 
+// 库方法
 const {Sequelize,Model} = require('sequelize')
+
+// 自己写的实例
 const {sequelize} = require('../../core/db')
 
 // 数据库 用户模块
@@ -15,7 +19,8 @@ class User extends Model {
         if (!user) {
             throw new global.errs.AuthFailed('账号不存在')
         }
-        // user.password === plainPassword  检验密码
+
+        // user.password === plainPassword  检验密码的一致性
         const correct = bcrypt.compareSync(plainPassword, user.password)
         if(!correct){
             throw new global.errs.AuthFailed('密码不正确')
@@ -51,7 +56,7 @@ User.init({
     nickname: Sequelize.STRING,
     email: {
         type: Sequelize.STRING(128),
-        unique: true
+        unique: true   // 唯一性
     },
     password: {
         //扩展 设计模式 观察者模式
@@ -70,9 +75,10 @@ User.init({
     },
 }, {
     sequelize,
-    tableName: 'user'
+    tableName: 'user'  // 表名称
 })
 
+// 导出模块，其他组件可调用库方法，和类方法
 module.exports = {
     User
 }

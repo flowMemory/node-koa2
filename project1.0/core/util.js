@@ -39,6 +39,7 @@ const findMembers = function (instance, {
     return _find(instance)
 }
 
+// 根据用户id, 权限等级, 秘钥， 期限 生成身份令牌
 const generateToken = function(uid, scope){
     const secretKey = global.config.security.secretKey
     const expiresIn = global.config.security.expiresIn

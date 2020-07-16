@@ -10,6 +10,7 @@ class InitManager {
         InitManager.loadHttpException()
     }
 
+    // 引入配置到全局
     static loadConfig(path = '') {
         const configPath = path || process.cwd() + '/config/config.js'
         const { config } = require(configPath)
@@ -31,6 +32,7 @@ class InitManager {
     }
 
     static loadHttpException(){
+        // 引入所有的错误类型到全局errs属性
         const errors = require('./http-exception')
         global.errs = errors
     }

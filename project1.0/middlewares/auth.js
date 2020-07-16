@@ -3,12 +3,14 @@ const jwt = require('jsonwebtoken')
 
 class Auth {
     constructor(level) {
+        // 等级权限等级
         this.level = level || 1
         Auth.USER = 8
         Auth.ADMIN = 16
         Auth.SUPER_ADMIN = 32
     }
 
+    // 判断权限要求
     get m() {
         return async (ctx, next) => {
             
@@ -19,6 +21,7 @@ class Auth {
                 throw new global.errs.Forbbiden(errMsg)
             }
             try {
+                // 校验token
                 var decode = jwt.verify(userToken.name, 
                     global.config.security.secretKey)
             } catch (error) {
@@ -28,12 +31,13 @@ class Auth {
                 throw new global.errs.Forbbiden(errMsg)
             }
 
+            // 用户令牌权限不足
             if(decode.scope < this.level){
                 errMsg = '权限不足'
                 throw new global.errs.Forbbiden(errMsg)
             }
 
-            // uid,scope
+            // uid,scope 通过后把用户身份，权限记录在ctx对象上，方便其他地方调用
             ctx.auth = {
                 uid:decode.uid,
                 scope:decode.scope

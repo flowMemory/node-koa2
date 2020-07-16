@@ -68,7 +68,7 @@ class RegisterValidator extends LinValidator {
 // 登录接口
 class TokenValidator extends LinValidator {
     constructor() {
-        //隐藏的错误
+        // 隐藏的错误
         // Java
         // JS Python 
         super()

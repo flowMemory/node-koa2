@@ -8,6 +8,7 @@ const {
     password
 } = require('../config/config').config.database
 
+// 初始化 sequelize 传入连接数据库需要的配置
 const sequelize = new Sequelize(dbName,user,password,{
     dialect:'mysql',
     host,

@@ -19,7 +19,6 @@ router.post('/', async (ctx) => {
     // 验证登录
     const v = await new TokenValidator().validate(ctx)
     let token;
-    console.log(v.get('body.type'))
     switch (v.get('body.type')) {
         case LoginType.USER_EMAIL:
             token = await emailLogin(v.get('body.account'), v.get('body.secret'))
@@ -53,7 +52,7 @@ async function emailLogin(account, secret) {
     // 查询库检验账号密码
     const user = await User.verifyEmailPassword(account, secret)
 
-    // 合法后生成token：最终返回token给客服端
+    // 合法后生成token：最终返回token给客服端 - 传参数据库生成的用户id 和 定义的用户权限等级
     return token = generateToken(user.id, Auth.USER)
 }
 
