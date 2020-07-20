@@ -47,27 +47,51 @@
 
         2. bcrypt.js 数据加密
         3. jwt：生成token
-        启用服务器和数据库：
-            1. 服务器配置：
-                1. 这里使用的是一个服务器集成工具（xampp apache mysql php）
-                2. xampp 会自动安装 apache mesql等、
-                3. 数据库可视化管理工具：Navicat for MySQL
+            启用服务器和数据库：
+                1. 服务器配置：
+                    1. 这里使用的是一个服务器集成工具（xampp apache mysql php）
+                    2. xampp 会自动安装 apache mesql等、
+                    3. 数据库可视化管理工具：Navicat for MySQL
 
-            2. 启用服务器：
-                1. 利用xampp启动MySQL
-                2. 打开 Navicat 配置数据库连接
-                    连接名：island
-                    初始化密码：选择数据库，菜单选中用户，然后修改默认配置: island123
-                        xammpp：修改数据库连接密码
-                            1. 控制台修改MySQL，my.ini password
-                            2. xampp\phpMyAdmin\config.inc.php : 修改$cfg['Servers'][$i]['password'] = 'island123';
+                2. 启用服务器：
+                    1. 利用xampp启动MySQL
+                    2. 打开 Navicat 配置数据库连接
+                        连接名：island
+                        初始化密码：选择数据库，菜单选中用户，然后修改默认配置: island123
+                            xammpp：修改数据库连接密码
+                                1. 控制台修改MySQL，my.ini password
+                                2. xampp\phpMyAdmin\config.inc.php : 修改$cfg['Servers'][$i]['password'] = 'island123';
 
-                3. 新建数据库：点击连接，右键新建数据库，字符键：utf8mb4，排序规则：UTF8mb4_general_ci
+                    3. 新建数据库：点击连接，右键新建数据库，字符键：utf8mb4，排序规则：UTF8mb4_general_ci
 
 
-                    数据库修改默认密码：
-                        1. 进入xampp mysql文件目录，mqsql > bin
-                        2. 数据库操作命令：mysql set password for 用户名@localhost = password(‘新密码')                   
+                        数据库修改默认密码：
+                            1. 进入xampp mysql文件目录，mqsql > bin
+                            2. 数据库操作命令：mysql set password for 用户名@localhost = password(‘新密码')
+
+                    4. 向数据库导入数据方式一：执行现有sql文件，右击数据库，选择运行数据库文件，选择SQL文件
+
+                3. 数据库设计思路：
+                        1. 按照model划分，把表按照实例化的类思考，例如user模型，期款模型，期刊又可以按照不同的类型细化模型。
+                           从而最终形成一个个数据表
+                            * 以表来描述model
+
+                        2. 抽象表，依据业务需求设计的表，例如期刊排期表，把发布的所有不同的期刊集合成一个表。从而满足用户浏览当前
+                           发布期刊的功能。
+                            * 业务表是抽象逻辑的表达，根据业务变动，表功能变化性大，要求可扩展性高。并且业务表往往是表查询的入口，所以
+                              业务表的设计是否合理影响了业务的实现，数据库性能等方面。其要求更高
+
+                        3. 设计具体思路：
+                            1. 思考所有modal表的所有字段，共有字段，特性字段
+
+                            2. flow - model表（抽象表）设计，业务字段，关联实体表字段，根据关联字段想实体表做查询。例如id, type等
+                               type决定了查询哪个类型的表，id决定了哪条具体的记录
+
+                            3. 数据表之间的关联构成了数据的连接
+
+            
+        4. 继续进行服务端编程：
+                    1. 编写微信小程序测试项目，进行接口调试
  
     服务端编程的外延：
         1. 项目部署
