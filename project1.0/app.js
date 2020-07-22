@@ -13,4 +13,5 @@ app.use(parser())
 // 调用静态方法，初始化路由注册
 InitManager.initCore(app)
 
+// 监听的端口
 app.listen(3000);

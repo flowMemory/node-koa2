@@ -6,12 +6,17 @@ const { generateToken } = require('../../core/util')
 const { Auth } = require('../../middlewares/auth')
 
 class WXManager {
-
+    
+    // 微信业务 - 获取openID
     static async codeToToken(code) {
-        const url = util.format(global.config.wx.loginUrl,
+
+        // 原生url 工具 - （待理解）
+        const url = util.format(
+            global.config.wx.loginUrl,
             global.config.wx.appId,
             global.config.wx.appSecret,
-            code)
+            code
+        )
 
         const result = await axios.get(url)
         if (result.status !== 200) {
@@ -26,6 +31,7 @@ class WXManager {
         // 档案 user uid openid 长
         // openid 
 
+        // 判断openid决定是否注册或者返回token
         let user = await User.getUserByOpenid(result.data.openid)
         if(!user){
             user = await User.registerByOpenid(result.data.openid)
