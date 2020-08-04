@@ -1,3 +1,4 @@
+// 解析HttpBasicAuth的库
 const basicAuth = require('basic-auth')
 const jwt = require('jsonwebtoken')
 
@@ -10,11 +11,13 @@ class Auth {
         Auth.SUPER_ADMIN = 32
     }
 
-    // 判断权限要求
+    // 判断权限要求 - 接收客户端传递的token 身份验证机制之一：HttpBasicAuth 通过header传递
     get m() {
         return async (ctx, next) => {
             
+            // ctx.req是 nodejs 原生的request对象，通过basicAuth库解析request对象，获取token
             const userToken = basicAuth(ctx.req)
+
             let errMsg = 'token不合法'
 
             if (!userToken || !userToken.name) {
@@ -22,8 +25,7 @@ class Auth {
             }
             try {
                 // 校验token
-                var decode = jwt.verify(userToken.name, 
-                    global.config.security.secretKey)
+                var decode = jwt.verify(userToken.name, global.config.security.secretKey)
             } catch (error) {
                 if (error.name == 'TokenExpiredError'){
                     errMsg = 'token已过期'

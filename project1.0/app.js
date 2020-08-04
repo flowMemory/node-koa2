@@ -1,3 +1,5 @@
+require('module-alias/register')
+
 const Koa = require('koa');
 // 解析json参数
 const parser = require('koa-bodyparser')

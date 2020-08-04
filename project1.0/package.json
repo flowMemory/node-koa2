@@ -28,9 +28,9 @@
     "sequelize": "^5.6.1",
     "validator": "^10.11.0"
   },
-  "_moduleAliases":{
-    "@root":".",
-    "@models":"app/models",
-    "@validator":"app/validators/validator.js"
+  "_moduleAliases": {
+    "@root": ".",
+    "@models": "app/models",
+    "@validator": "app/validators/validator.js"
   }
 }

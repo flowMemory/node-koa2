@@ -127,6 +127,8 @@
 
         服务端编程小技巧：
             1. 别名系统：简化文件引入，缩短路径编写：node：module-alias 
+                        app.js  require('module-alias/register')
+                        
             2. scope：   作用域空间，预置sql条件，在需要使用的model实例上操作数据表，传入对应的scope名，即可调用
                          以及scope在做update时出现SQL bug (原来的版本，现在未知)
 

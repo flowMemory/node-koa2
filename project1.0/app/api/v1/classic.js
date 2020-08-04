@@ -1,5 +1,6 @@
 const Router = require('koa-router');
 const {PositiveIntegerValidator} = require('../../validators/validator');
+const {Auth} = require('../../../middlewares/auth');
 const {Flow} = require('@models/flow');
 const {Art} = require('@models/art');
 const {Favor} = require('@models/favor')
@@ -9,7 +10,7 @@ const router = new Router({
 })
 
 // 获取最新一期
-router.get('/latest', async (ctx, next) => {
+router.get('/latest', new Auth().m, async (ctx, next) => {
     // test no await
     let latest = Flow.findLatest()
 
