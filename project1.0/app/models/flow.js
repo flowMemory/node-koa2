@@ -2,7 +2,14 @@ const {Sequelize, Model} = require('sequelize')
 const {sequelize} = require('../../core/db')
 
 class Flow extends Model {
-
+    static async findLatest() {
+        const latest = await Flow.findOne({
+            order: [
+                ['index', 'DESC']
+            ]
+        })
+        return latest
+    }
 }
 
 // Fields 字段

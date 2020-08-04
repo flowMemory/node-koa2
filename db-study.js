@@ -34,6 +34,16 @@
                 
             4. 这里的model user模块承担的业务划分是否合理，这里集中了初始化表字段，查询，常见数据等业务，是否需要重新划分业务模块
 
+        3. sequelize 语法：
+            一. sequelize 做表操作时，是以model类上的方法直接调用的：class User extends Model{}
+                api基本用法：findOne ：查询语句
+                    1. User.findOne({
+                            where: {
+                                email
+                            }
+                        })
+
+
     4. 数据库实践知识：
         一. 数据库软删除，和硬删除：
             1. 软删除：并不会真实的删除库中的数据，只会为数据添加一条删除的标识位
