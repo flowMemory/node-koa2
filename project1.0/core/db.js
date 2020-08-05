@@ -25,6 +25,7 @@ const sequelize = new Sequelize(dbName,user,password,{
         deletedAt:'deleted_at',
         underscored:true,
         freezeTableName:true,
+        // 定义scope初始化预置db操作条件
         scopes:{
             bh:{
                 attributes:{

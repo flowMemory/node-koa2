@@ -1,7 +1,7 @@
 const {Sequelize, Model} = require('sequelize')
 const {sequelize} = require('../../core/db')
 
-// 典型的业务实体表
+// 典型的业务实体表 - 不同类型期刊的表
 
 // 表共用字段
 const classicFields = {

@@ -6,7 +6,7 @@ const {Sequelize,Model} = require('sequelize')
 // 自己写的实例
 const {sequelize} = require('../../core/db')
 
-// 数据库 用户模块
+// 数据库 用户模块表
 class User extends Model {
 
     // 数据库层查询账号唯一性 登录校验

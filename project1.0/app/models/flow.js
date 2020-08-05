@@ -1,6 +1,8 @@
 const {Sequelize, Model} = require('sequelize')
 const {sequelize} = require('../../core/db')
 
+// 记录在排期的期刊数据
+
 class Flow extends Model {
     static async findLatest() {
         const latest = await Flow.findOne({

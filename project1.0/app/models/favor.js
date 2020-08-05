@@ -3,7 +3,7 @@ const { Sequelize, Model, Op } = require('sequelize')
 const {Art} = require('./art')
 
 class Favor extends Model {
-    // 业务表
+    // 业务表 - 记录用户喜好期刊表
     static async like(art_id, type, uid) {
         const favor = await Favor.findOne({
             where: {

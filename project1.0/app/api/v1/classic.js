@@ -15,7 +15,10 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
     let latest = Flow.findLatest()
 
     Art.getData(latest.art_id, latest.type, null)
+
+    // 查询用户是否喜欢期刊
     const likeLatest = await Favor.userLikeIt(latest.art_id, latest.type, ctx.auth.uid)
+
     art.setDataValue('index', latest.index)
     art.setDataValue('like_status', likeLatest)
     ctx.body = art
@@ -59,8 +62,7 @@ router.get('/:index/previous', new Auth().m, async (ctx) => {
         throw new global.errs.NotFound()
     }
     const art = await Art.getData(flow.art_id, flow.type)
-    const likePrevious = await Favor.userLikeIt(
-        flow.art_id, flow.type, ctx.auth.uid)
+    const likePrevious = await Favor.userLikeIt(flow.art_id, flow.type, ctx.auth.uid)
     art.setDataValue('index', flow.index)
     art.setDataValue('like_status', likePrevious)
     ctx.body = art
