@@ -5,7 +5,7 @@
 // 检验逻辑顺序：validator -> http-exception -> exception 
 const { LinValidator, Rule } = require('../../core/lin-validator-v2')
 const { User } = require('../models/user')
-const { LoginType } = require('../lib/enum')
+const { LoginType, ArtType } = require('../lib/enum')
 
 class PositiveIntegerValidator extends LinValidator {
     constructor() {
@@ -100,6 +100,7 @@ class TokenValidator extends LinValidator {
     }
 }
 
+// 非空验证
 class NotEmptyValidator extends LinValidator {
     constructor() {
         super()
@@ -111,9 +112,70 @@ class NotEmptyValidator extends LinValidator {
     }
 }
 
+// 检验期刊类型，并做int转型
+function checkType(vals) {
+    let type = vals.body.type || vals.path.type
+    if (!type) {
+        throw new Error('type是必须参数')
+    }
+    type = parseInt(type)
+
+    if (!LoginType.isThisType(type)) {
+        throw new Error('type参数不合法')
+    }
+}
+
+function checkArtType(vals) {
+    let type = vals.body.type || vals.path.type
+    if (!type) {
+        throw new Error('type是必须参数')
+    }
+    type = parseInt(type)
+
+    if (!ArtType.isThisType(type)) {
+        throw new Error('type参数不合法')
+    }
+}
+
+// 采用类的方式兼容不同接口期刊传参的检验 - 不推荐（函数解耦）
+class Checker {
+    constructor(type) {
+        this.enumType = type
+    }
+
+    check(vals) {
+        let type = vals.body.type || vals.path.type
+        if (!type) {
+            throw new Error('type是必须参数')
+        }
+        type = parseInt(type)
+
+        if (!this.enumType.isThisType(type)) {
+            throw new Error('type参数不合法')
+        }
+
+    }
+}
+
+
+class LikeValidator extends PositiveIntegerValidator {
+    constructor() {
+        super()
+        this.validateType = checkArtType
+        // const checker = new Checker(ArtType)
+        // this.validateType = checker.check.bind(checker)
+    }
+}
+
+class ClassicValidator extends LikeValidator {
+
+}
+
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
     TokenValidator,
-    NotEmptyValidator
+    NotEmptyValidator,
+    ClassicValidator
 }

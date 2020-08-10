@@ -78,7 +78,7 @@ class Art {
         return arts
     }
 
-
+    // 这里为了兼容sequlize - update sql出错问题
     static async getData(art_id, type, useScope = true) {
 
         let art = null

@@ -16,6 +16,7 @@ const LoginType = {
     isThisType
 }
 
+// 期刊类型枚举
 const ArtType = {
     MOVIE:100,
     MUSIC:200,
