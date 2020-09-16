@@ -1,0 +1,23 @@
+<!-- 
+    node-express study 
+
+        一. express 和 koa设计用法很相似，都是以中间件机制架构的。express相对于koa内置的功能更多
+
+        二. express的中间件机制也分为三种：
+                1. 全局中间件，注册在全局对象app上, app.use(middleware)
+                2. 路由中间件，const express = require('express');  const router = express.Router();  router.use(middleware);
+                3. 单个中间件，使用在单个中间件的注册上，用法类似于koa的鉴权中间件
+
+        三. express的异常处理机制
+                1. express的异常机制和koa不同，express内置就已经捕获了所有异常，注册异常处理中间件即可
+                2. 对于已知错误，使用和koa类似的处理方法，try catch 捕获异常 or new error
+                3. express 404 不属于error类型，需要单独注册中间件处理
+
+        四. 中间件机制：
+                1. 中间件安装注册的顺序执行
+                2. 对于想要处理全局异常，或者路由异常的中间件，要在路由中间件之后注册
+
+
+
+
+ -->
