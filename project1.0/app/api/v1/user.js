@@ -26,7 +26,7 @@ router.post('/register', async (ctx) => {
         nickname: v.get('body.nickname')
     }
 
-    // 校验成功写入库
+    // 校验成功写入库 - 这里只是写入库，还没有生成token
     await User.create(user)
     success()
 })

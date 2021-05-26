@@ -16,4 +16,6 @@ app.use(parser())
 InitManager.initCore(app)
 
 // 监听的端口
-app.listen(3000);
+app.listen(3000, function() {
+  console.log("server is started："+3000)
+});

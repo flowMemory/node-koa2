@@ -11,16 +11,17 @@ const { generateToken } = require('../../../core/util')
 const {Auth} = require('../../../middlewares/auth')
 
 const router = new Router({
-    prefix: '/v1/token'
+    prefix: '/v1/api/token'
 })
 
-// 获取 token 接口 ：登录接口
+// 获取 token 接口 ：登录接口 - 登录接口中返回token
 router.post('/', async (ctx) => {
     // 验证登录
     const v = await new TokenValidator().validate(ctx)
     let token;
     switch (v.get('body.type')) {
         case LoginType.USER_EMAIL:
+            // 这里应该是加密head传输
             token = await emailLogin(v.get('body.account'), v.get('body.secret'))
             break
         case LoginType.USER_MINI_PROGRAM:
